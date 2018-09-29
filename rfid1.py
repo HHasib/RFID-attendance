@@ -10,10 +10,31 @@ filepath="%s/demo.xlsx" %x
 wb=load_workbook(filepath)
 sheet_add=wb['Sheet1']
 
-def add_excel():
+def add_excel_name():
 	sheet_add['B2']="Hasnat"
 	sheet_add['C2']=strftime("%Y-%m-%d %H:%M:%S", gmtime())
+	
+	r=2
+	e = sheet_add.cell(row=r,column=2)
+	j = str(e.value)
+	while not j=="None":
+		r+=1
+		e = sheet_add.cell(row=r,column=2)
+		j = str(e.value)
+	e.value = "Hasib"
+	
 	wb.save(filepath)
+	
+def add_excel_time():
+	r=2
+	e = sheet_add.cell(row=r,column=3)
+	j = str(e.value)
+	while not j=="None":
+		r+=1
+		e = sheet_add.cell(row=r,column=3)
+		j = str(e.value)
+	e.value = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+	
 
 COM = '/dev/tty.usbmodem1411'
 BAUD = 9600
@@ -31,4 +52,5 @@ while True:
 	
 	if (val == "24850484852515349555654563"):
 		print("Hasnat", end="\r", flush=True)
-		add_excel()
+		add_excel_name()
+		add_excel_time()
